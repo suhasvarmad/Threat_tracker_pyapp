@@ -1,0 +1,6 @@
+# In requirements.txt
+PyYAML
+langchain-google-genai
+confluent-kafka
+elasticsearch==8.9.0
+python-dotenv

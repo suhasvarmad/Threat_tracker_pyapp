@@ -1,0 +1,11 @@
+# In config.yaml
+
+kafka:
+  bootstrap_servers: 'kafka:29092'
+  topic: 'raw_logs'
+  group_id: 'unified-log-processor-group-1'
+
+# NEW: Add Elasticsearch configuration
+elasticsearch:
+  hosts: "http://elasticsearch:9200"
+  index_name: "unified_logs"

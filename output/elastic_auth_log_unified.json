@@ -1,0 +1,106 @@
+{
+  "logId": "H343O5gBEDtYBt-iGPqz",
+  "timestamp": "2025-07-24T06:54:56.251Z",
+  "source": {
+    "vendor": "Wazuh",
+    "version": "1.12.0",
+    "index": "wazuh-alerts-2025.07.24"
+  },
+  "agent": {
+    "id": "000",
+    "name": "ubuntu"
+  },
+  "endpoint": {
+    "name": "ubuntu",
+    "os": {
+      "name": "Ubuntu",
+      "version": "24.04.2 LTS (Noble Numbat)",
+      "family": "debian",
+      "type": "linux",
+      "kernel": "6.8.0-63-generic",
+      "codename": "noble",
+      "platform": "ubuntu"
+    },
+    "mac": [
+      "08:00:27:c6:88:ed"
+    ],
+    "ip": [
+      "192.168.0.18",
+      "fe80::a00:27ff:fec6:88ed"
+    ]
+  },
+  "event": {
+    "category": "Privilege Escalation",
+    "description": "Successful sudo to ROOT executed.",
+    "fullLog": "{\"agent\": {\"id\": \"000\", \"name\": \"ubuntu\"}, \"predecoder\": {\"timestamp\": \"2025-07-24T06:54:54.986159+00:00\", \"program_name\": \"sudo\"}, \"@version\": \"1\", \"ecs\": {\"version\": \"1.12.0\"}, \"decoder\": {\"ftscomment\": \"First time user executed the sudo command\", \"parent\": \"sudo\", \"name\": \"sudo\"}, \"data\": {\"command\": \"/usr/bin/systemctl status kibana\", \"dstuser\": \"root\", \"tty\": \"pts/0\", \"pwd\": \"/home/ubuntu\", \"srcuser\": \"ubuntu\"}, \"rule\": {\"groups\": [\"syslog\", \"sudo\"], \"pci_dss\": [\"10.2.5\", \"10.2.2\"], \"mail\": false, \"level\": 3, \"id\": \"5402\", \"mitre\": {\"id\": [\"T1548.003\"], \"technique\": [\"Sudo and Sudo Caching\"], \"tactic\": [\"Privilege Escalation\", \"Defense Evasion\"]}, \"hipaa\": [\"164.312.b\"], \"nist_800_53\": [\"AU.14\", \"AC.7\", \"AC.6\"], \"gpg13\": [\"7.6\", \"7.8\", \"7.13\"], \"tsc\": [\"CC6.8\", \"CC7.2\", \"CC7.3\"], \"gdpr\": [\"IV_32.2\"], \"description\": \"Successful sudo to ROOT executed.\", \"firedtimes\": 14}, \"manager\": {\"name\": \"ubuntu\"}, \"input\": {\"type\": \"log\"}, \"tags\": [\"beats_input_codec_plain_applied\"], \"id\": \"1753340096.22576\", \"location\": \"/var/log/auth.log\", \"@timestamp\": \"2025-07-24T06:54:56.251Z\", \"timestamp\": \"2025-07-24T06:54:56.251+0000\", \"log\": {\"file\": {\"path\": \"/var/ossec/logs/alerts/alerts.json\"}, \"offset\": 42961}, \"host\": {\"os\": {\"family\": \"debian\", \"name\": \"Ubuntu\", \"type\": \"linux\", \"platform\": \"ubuntu\", \"version\": \"24.04.2 LTS (Noble Numbat)\", \"codename\": \"noble\", \"kernel\": \"6.8.0-63-generic\"}, \"containerized\": false, \"name\": \"ubuntu\", \"architecture\": \"x86_64\", \"hostname\": \"ubuntu\", \"mac\": [\"08:00:27:c6:88:ed\"], \"ip\": [\"192.168.0.18\", \"fe80::a00:27ff:fec6:88ed\"], \"id\": \"7932a2cd41c94833beb9c1cc5badd63c\"}, \"full_log\": \"2025-07-24T06:54:54.986159+00:00 ubuntu sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/systemctl status kibana\"}"
+  },
+  "tactic": "Privilege Escalation",
+  "technique": "Sudo and Sudo Caching",
+  "process": {
+    "name": "sudo",
+    "cmdLine": "/usr/bin/systemctl status kibana",
+    "eUser": {
+      "name": "ubuntu"
+    },
+    "rUser": {}
+  },
+  "target": {
+    "file": {}
+  },
+  "rule": {
+    "id": "5402",
+    "groups": [
+      "syslog",
+      "sudo"
+    ],
+    "level": 3,
+    "firedTimes": 14,
+    "compliance": {
+      "pci_dss": [
+        "10.2.5",
+        "10.2.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.6"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "mitre": {
+        "tactics": [
+          "Privilege Escalation",
+          "Defense Evasion"
+        ],
+        "techniques": [
+          "Sudo and Sudo Caching"
+        ]
+      }
+    }
+  },
+  "metrics": {},
+  "networkConnection": {},
+  "cloud": {},
+  "email": {},
+  "registry": {},
+  "manager": {
+    "name": "ubuntu"
+  },
+  "decoder": {
+    "name": "sudo",
+    "parent": "sudo"
+  },
+  "log": {
+    "offset": 42961,
+    "filePath": "/var/ossec/logs/alerts/alerts.json"
+  },
+  "tags": [],
+  "alert_metadata": {},
+  "additionalData": {
+    "destinationUser": "root"
+  }
+}

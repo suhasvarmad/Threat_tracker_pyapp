@@ -1,0 +1,440 @@
+{
+  "_index": "wazuh-alerts-2025.07.24",
+  "_type": "_doc",
+  "_id": "H343O5gBEDtYBt-iGPqz",
+  "_version": 1,
+  "_score": 1,
+  "_source": {
+    "agent": {
+      "id": "000",
+      "name": "ubuntu"
+    },
+    "predecoder": {
+      "timestamp": "2025-07-24T06:54:54.986159+00:00",
+      "program_name": "sudo"
+    },
+    "@version": "1",
+    "ecs": {
+      "version": "1.12.0"
+    },
+    "decoder": {
+      "ftscomment": "First time user executed the sudo command",
+      "parent": "sudo",
+      "name": "sudo"
+    },
+    "data": {
+      "command": "/usr/bin/systemctl status kibana",
+      "dstuser": "root",
+      "tty": "pts/0",
+      "pwd": "/home/ubuntu",
+      "srcuser": "ubuntu"
+    },
+    "rule": {
+      "groups": [
+        "syslog",
+        "sudo"
+      ],
+      "pci_dss": [
+        "10.2.5",
+        "10.2.2"
+      ],
+      "mail": false,
+      "level": 3,
+      "id": "5402",
+      "mitre": {
+        "id": [
+          "T1548.003"
+        ],
+        "technique": [
+          "Sudo and Sudo Caching"
+        ],
+        "tactic": [
+          "Privilege Escalation",
+          "Defense Evasion"
+        ]
+      },
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.6"
+      ],
+      "gpg13": [
+        "7.6",
+        "7.8",
+        "7.13"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "description": "Successful sudo to ROOT executed.",
+      "firedtimes": 14
+    },
+    "manager": {
+      "name": "ubuntu"
+    },
+    "input": {
+      "type": "log"
+    },
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ],
+    "id": "1753340096.22576",
+    "location": "/var/log/auth.log",
+    "@timestamp": "2025-07-24T06:54:56.251Z",
+    "timestamp": "2025-07-24T06:54:56.251+0000",
+    "log": {
+      "file": {
+        "path": "/var/ossec/logs/alerts/alerts.json"
+      },
+      "offset": 42961
+    },
+    "host": {
+      "os": {
+        "family": "debian",
+        "name": "Ubuntu",
+        "type": "linux",
+        "platform": "ubuntu",
+        "version": "24.04.2 LTS (Noble Numbat)",
+        "codename": "noble",
+        "kernel": "6.8.0-63-generic"
+      },
+      "containerized": false,
+      "name": "ubuntu",
+      "architecture": "x86_64",
+      "hostname": "ubuntu",
+      "mac": [
+        "08:00:27:c6:88:ed"
+      ],
+      "ip": [
+        "192.168.0.18",
+        "fe80::a00:27ff:fec6:88ed"
+      ],
+      "id": "7932a2cd41c94833beb9c1cc5badd63c"
+    },
+    "full_log": "2025-07-24T06:54:54.986159+00:00 ubuntu sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/systemctl status kibana"
+  },
+  "fields": {
+    "rule.id": [
+      "5402"
+    ],
+    "host.name.keyword": [
+      "ubuntu"
+    ],
+    "rule.id.keyword": [
+      "5402"
+    ],
+    "rule.nist_800_53": [
+      "AU.14",
+      "AC.7",
+      "AC.6"
+    ],
+    "host.hostname": [
+      "ubuntu"
+    ],
+    "host.mac": [
+      "08:00:27:c6:88:ed"
+    ],
+    "rule.gdpr.keyword": [
+      "IV_32.2"
+    ],
+    "rule.mitre.id": [
+      "T1548.003"
+    ],
+    "host.os.version": [
+      "24.04.2 LTS (Noble Numbat)"
+    ],
+    "predecoder.timestamp": [
+      "2025-07-24T06:54:54.986Z"
+    ],
+    "rule.hipaa.keyword": [
+      "164.312.b"
+    ],
+    "agent.name": [
+      "ubuntu"
+    ],
+    "rule.groups.keyword": [
+      "syslog",
+      "sudo"
+    ],
+    "id": [
+      "1753340096.22576"
+    ],
+    "rule.mitre.technique": [
+      "Sudo and Sudo Caching"
+    ],
+    "data.tty": [
+      "pts/0"
+    ],
+    "host.os.type": [
+      "linux"
+    ],
+    "predecoder.program_name": [
+      "sudo"
+    ],
+    "decoder.ftscomment.keyword": [
+      "First time user executed the sudo command"
+    ],
+    "agent.id.keyword": [
+      "000"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "000"
+    ],
+    "decoder.name": [
+      "sudo"
+    ],
+    "host.containerized": [
+      false
+    ],
+    "data.srcuser": [
+      "ubuntu"
+    ],
+    "location.keyword": [
+      "/var/log/auth.log"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "rule.hipaa": [
+      "164.312.b"
+    ],
+    "tags.keyword": [
+      "beats_input_codec_plain_applied"
+    ],
+    "rule.mitre.tactic.keyword": [
+      "Privilege Escalation",
+      "Defense Evasion"
+    ],
+    "rule.nist_800_53.keyword": [
+      "AU.14",
+      "AC.7",
+      "AC.6"
+    ],
+    "host.ip": [
+      "192.168.0.18",
+      "fe80::a00:27ff:fec6:88ed"
+    ],
+    "host.os.kernel.keyword": [
+      "6.8.0-63-generic"
+    ],
+    "rule.gpg13.keyword": [
+      "7.6",
+      "7.8",
+      "7.13"
+    ],
+    "manager.name": [
+      "ubuntu"
+    ],
+    "rule.pci_dss": [
+      "10.2.5",
+      "10.2.2"
+    ],
+    "data.command": [
+      "/usr/bin/systemctl status kibana"
+    ],
+    "host.id": [
+      "7932a2cd41c94833beb9c1cc5badd63c"
+    ],
+    "predecoder.program_name.keyword": [
+      "sudo"
+    ],
+    "timestamp": [
+      "2025-07-24T06:54:56.251Z"
+    ],
+    "decoder.parent.keyword": [
+      "sudo"
+    ],
+    "decoder.ftscomment": [
+      "First time user executed the sudo command"
+    ],
+    "agent.name.keyword": [
+      "ubuntu"
+    ],
+    "manager.name.keyword": [
+      "ubuntu"
+    ],
+    "rule.mitre.tactic": [
+      "Privilege Escalation",
+      "Defense Evasion"
+    ],
+    "data.pwd": [
+      "/home/ubuntu"
+    ],
+    "host.os.codename": [
+      "noble"
+    ],
+    "@timestamp": [
+      "2025-07-24T06:54:56.251Z"
+    ],
+    "host.os.platform": [
+      "ubuntu"
+    ],
+    "log.file.path": [
+      "/var/ossec/logs/alerts/alerts.json"
+    ],
+    "decoder.name.keyword": [
+      "sudo"
+    ],
+    "rule.description.keyword": [
+      "Successful sudo to ROOT executed."
+    ],
+    "rule.firedtimes": [
+      14
+    ],
+    "rule.level": [
+      3
+    ],
+    "full_log.keyword": [
+      "2025-07-24T06:54:54.986159+00:00 ubuntu sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/systemctl status kibana"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "ecs.version.keyword": [
+      "1.12.0"
+    ],
+    "host.ip.keyword": [
+      "192.168.0.18",
+      "fe80::a00:27ff:fec6:88ed"
+    ],
+    "host.os.name": [
+      "Ubuntu"
+    ],
+    "host.id.keyword": [
+      "7932a2cd41c94833beb9c1cc5badd63c"
+    ],
+    "host.name": [
+      "ubuntu"
+    ],
+    "host.os.version.keyword": [
+      "24.04.2 LTS (Noble Numbat)"
+    ],
+    "rule.tsc": [
+      "CC6.8",
+      "CC7.2",
+      "CC7.3"
+    ],
+    "decoder.parent": [
+      "sudo"
+    ],
+    "rule.tsc.keyword": [
+      "CC6.8",
+      "CC7.2",
+      "CC7.3"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "rule.description": [
+      "Successful sudo to ROOT executed."
+    ],
+    "log.offset": [
+      42961
+    ],
+    "data.dstuser": [
+      "root"
+    ],
+    "data.dstuser.keyword": [
+      "root"
+    ],
+    "ecs.version": [
+      "1.12.0"
+    ],
+    "rule.mitre.technique.keyword": [
+      "Sudo and Sudo Caching"
+    ],
+    "host.hostname.keyword": [
+      "ubuntu"
+    ],
+    "host.os.family": [
+      "debian"
+    ],
+    "rule.groups": [
+      "syslog",
+      "sudo"
+    ],
+    "data.command.keyword": [
+      "/usr/bin/systemctl status kibana"
+    ],
+    "rule.gdpr": [
+      "IV_32.2"
+    ],
+    "rule.pci_dss.keyword": [
+      "10.2.5",
+      "10.2.2"
+    ],
+    "full_log": [
+      "2025-07-24T06:54:54.986159+00:00 ubuntu sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/systemctl status kibana"
+    ],
+    "id.keyword": [
+      "1753340096.22576"
+    ],
+    "host.os.kernel": [
+      "6.8.0-63-generic"
+    ],
+    "@version": [
+      "1"
+    ],
+    "data.srcuser.keyword": [
+      "ubuntu"
+    ],
+    "host.os.name.keyword": [
+      "Ubuntu"
+    ],
+    "log.file.path.keyword": [
+      "/var/ossec/logs/alerts/alerts.json"
+    ],
+    "rule.gpg13": [
+      "7.6",
+      "7.8",
+      "7.13"
+    ],
+    "host.os.codename.keyword": [
+      "noble"
+    ],
+    "host.mac.keyword": [
+      "08:00:27:c6:88:ed"
+    ],
+    "data.tty.keyword": [
+      "pts/0"
+    ],
+    "host.os.family.keyword": [
+      "debian"
+    ],
+    "rule.mail": [
+      false
+    ],
+    "data.pwd.keyword": [
+      "/home/ubuntu"
+    ],
+    "host.os.type.keyword": [
+      "linux"
+    ],
+    "host.os.platform.keyword": [
+      "ubuntu"
+    ],
+    "location": [
+      "/var/log/auth.log"
+    ],
+    "rule.mitre.id.keyword": [
+      "T1548.003"
+    ]
+  }
+}

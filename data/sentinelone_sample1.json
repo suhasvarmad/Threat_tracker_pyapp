@@ -1,0 +1,99 @@
+{
+  "account": {
+    "id": "2068057852109298983",
+    "name": "Paradigm IT Technologies Private Limited"
+  },
+  "site": {
+    "id": "2091167892314069827",
+    "name": "Test_Trbl"
+  },
+  "agent": {
+    "uuid": "UwU43beae87-c10-0aa0-7ea8-8645a0226218",
+    "version": "24.3.3.6"
+  },
+  "endpoint": {
+    "name": "UwU",
+    "os": "linux",
+    "type": "server"
+  },
+  "dataSource": {
+    "category": "security",
+    "name": "SentinelOne",
+    "vendor": "SentinelOne"
+  },
+  "event": {
+    "id": "01K0S66MC0SXKDCNSMDHPF1C10_16",
+    "time": "Jul 22 2025 19:15:01",
+    "type": "Process Creation",
+    "category": "process",
+    "os_name": "Linux"
+  },
+  "process": {
+    "pid": 7228,
+    "unique_id": "dash54bf121e-b9be-930f-9855-702fcee84974",
+    "uid": "5424bdad-1b1d-b035-a9a4-819a4a99ab21",
+    "name": "dash",
+    "displayName": "dash",
+    "cmdline": "/bin/sh -c /bin/chown root:root '/tmp'/suidhelper; /bin/chmod 06755 '/tmp'/suidhelper",
+    "imagePath": "/bin/dash",
+    "sha1": "4ce28b5cb6179da43132c0d6cacb3d369fbadd90",
+    "sha256": "8cc3e6ea29b4fa72578418757ca4bc01e2b448d1a9a4af014e2527a04dafb8b8",
+    "size": 154072,
+    "eUser": {
+      "name": "root",
+      "uid": 0
+    },
+    "rUser": {
+      "name": "root",
+      "uid": 0
+    },
+    "startTime": "Jul 22 2025 19:15:01",
+    "storylineId": "5424bd96-5757-9241-1431-4590992549a8",
+    "signedStatus": "unsigned"
+  },
+  "parent_process": {
+    "pid": 7227,
+    "uid": "5424bd94-daaa-9474-7b7c-6e5adb2813a3",
+    "name": "cron",
+    "displayName": "cron",
+    "cmdline": "/usr/sbin/CRON -f",
+    "imagePath": "/usr/sbin/cron",
+    "sha1": "cd4159d4637f7e78e4a0471036df02e98008a308",
+    "sha256": "3309e8f29e53d56d177ab2ad4b814cd3d8215944a0bbe233e4987661d1db5afd",
+    "size": 44472,
+    "eUser": {
+      "name": "root",
+      "uid": 0
+    },
+    "rUser": {
+      "name": "root",
+      "uid": 0
+    },
+    "startTime": "Jul 22 2025 19:15:01",
+    "storylineId": "5424bd96-5757-9241-1431-4590992549a8",
+    "signedStatus": "unsigned"
+  },
+  "target_process": {
+    "pid": 7229,
+    "unique_id": "chown54bf1247-51fc-198d-b733-16dabfb42a9a",
+    "uid": "5430768f-3be9-ed86-3ce2-f2faa551549c",
+    "name": "chown",
+    "displayName": "chown",
+    "cmdline": "/bin/chown root:root /tmp/suidhelper",
+    "imagePath": "/bin/chown",
+    "sha1": "6336b067d1d6da61f59d3ee1222b75606ccbb08c",
+    "sha256": "db15832e5d2bc4c349953fe71e0bfb9e6d39e3716c953df354e98a60d3b936a4",
+    "size": 64368,
+    "eUser": {
+      "name": "root",
+      "uid": 0
+    },
+    "rUser": {
+      "name": "root",
+      "uid": 0
+    },
+    "startTime": "Jul 22 2025 19:15:01",
+    "storylineId": "5424bd96-5757-9241-1431-4590992549a8",
+    "signedStatus": "unsigned"
+  }
+}

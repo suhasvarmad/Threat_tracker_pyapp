@@ -1,0 +1,15 @@
+services:
+  listener:
+    image: alpine
+    container_name: listener_test
+    # This command tells the container to listen for a connection on port 1234
+    command: nc -l -p 1234
+
+  sender:
+    image: alpine
+    container_name: sender_test
+    depends_on:
+      - listener
+    # This command waits 5 seconds, then tries to send a message to the listener
+    command: sh -c "sleep 5 && echo 'Connection successful' | nc listener 1234"
+    

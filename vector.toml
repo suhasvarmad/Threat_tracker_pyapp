@@ -1,0 +1,12 @@
+# In vector.toml
+
+[sources.log_file_source]
+  type = "file"
+  include = [ "/var/log/testdata/test.log" ]
+
+[sinks.kafka_sink]
+  type = "kafka"
+  inputs = ["log_file_source"]
+  bootstrap_servers = "kafka:29092"
+  topic = "raw_logs"
+  encoding.codec = "json"
