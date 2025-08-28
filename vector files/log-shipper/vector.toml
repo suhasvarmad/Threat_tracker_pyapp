@@ -1,0 +1,19 @@
+# In vector.toml on the TEST device
+
+
+
+[sources.log_file_source]
+  type = "file"
+  include = [ "/var/log/testdata/test.log" ]
+  # This forces Vector to re-read the file every second, which is reliable.
+  polling_frequency_secs = 1
+
+
+
+[sinks.kafka_sink]
+  type = "kafka"
+  inputs = ["log_file_source"]
+  # Make sure this IP address is correct for your corporate device
+  bootstrap_servers = "192.168.0.12:9092"
+  topic = "raw_logs"
+  encoding.codec = "json"

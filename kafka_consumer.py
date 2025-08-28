@@ -55,24 +55,67 @@ def main():
             raw_log_str = msg.value().decode('utf-8')
             logging.info("--- Received Raw Log from Kafka ---")
 
-            # --- NEW: Smart Vendor Detection ---
+            # --- Parse the outer message (Vector may wrap the real JSON in "message") ---
+            try:
+                outer = json.loads(raw_log_str)
+            except json.JSONDecodeError:
+                logging.error("Could not parse JSON from Kafka message (outer). Skipping.")
+                continue
+
+            # Try to unwrap inner JSON if present (Vector file source usually puts the line in 'message')
+            inner_payload = None
+
+            # Common Vector shapes:
+            # 1) {"file": "...", "host": "...", "message": "{\"vendor\":\"...\", ...}", "timestamp": "..."}
+            # 2) {"event": {"fullLog": "{\"vendor\":\"...\", ...}"}, ...}
+            # 3) Manual ingestion: already the vendor JSON (no wrapping)
+
+            # Candidate 1: outer["message"] is JSON string
+            msg_field = outer.get("message")
+            if isinstance(msg_field, str):
+                try:
+                    # strip CR/LF noise that can break JSON parsing
+                    inner_payload = json.loads(msg_field.strip())
+                except json.JSONDecodeError:
+                    inner_payload = None
+
+            # Candidate 2: outer["event"]["fullLog"] is JSON string
+            if inner_payload is None:
+                full_log = (outer.get("event") or {}).get("fullLog")
+                if isinstance(full_log, str):
+                    try:
+                        inner_payload = json.loads(full_log.strip())
+                    except json.JSONDecodeError:
+                        inner_payload = None
+
+            # Choose effective payload:
+            # - If we found a valid inner JSON -> use it (Vector case)
+            # - Else -> use the outer object (manual ingestion case)
+            effective = inner_payload if inner_payload is not None else outer
+
+            # --- Smart Vendor Detection on the *effective* payload ---
             vendor = 'unknown'
             try:
-                # First, try to parse the string as JSON
-                log_data = json.loads(raw_log_str)
+                if isinstance(effective, dict):
+                    # Wazuh-in-Elastic style
+                    if '_source' in effective and 'rule' in effective['_source']:
+                        vendor = 'elastic'
+                    # SentinelOne style
+                    elif 'dataSource' in effective and isinstance(effective['dataSource'], dict) and \
+                         'vendor' in effective['dataSource']:
+                        vendor = effective['dataSource']['vendor']
+                else:
+                    # edge case: effective is not a dict (shouldn't happen after json loads)
+                    pass
+            except Exception as e:
+                logging.warning(f"Vendor detection error (non-fatal): {e}")
 
-                # Look for the vendor in common locations
-                if '_source' in log_data and 'rule' in log_data['_source']:
-                    vendor = 'elastic' # It's a Wazuh-in-Elastic log
-                elif 'dataSource' in log_data and 'vendor' in log_data['dataSource']:
-                    vendor = log_data['dataSource']['vendor']
-
-            except json.JSONDecodeError:
-                logging.error("Could not parse JSON from Kafka message.")
-                continue # Skip this message
-
-            # --- Use the detected vendor ---
-            unified_log = process_log(raw_log_str, vendor=vendor.lower())
+            # --- Hand off to your existing mapper exactly as before, but with unwrapped payload ---
+            try:
+                unified_log = process_log(json.dumps(effective), vendor=vendor.lower())
+            except Exception as e:
+                logging.error(f"process_log failed: {e}")
+                continue
 
             if unified_log:
                 logging.info("--- Successfully Unified Log ---")

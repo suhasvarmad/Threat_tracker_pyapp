@@ -16,26 +16,31 @@ services:
     container_name: kafka
     ports:
       - "9092:9092"
+      - "29092:29092"
     depends_on:
       zookeeper:
         condition: service_healthy
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_INTERNAL://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.0.12:9092,PLAINTEXT_INTERNAL://kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT_INTERNAL
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
   
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
     container_name: elasticsearch
+    # ADDED: The missing ports and environment sections
     ports:
       - "9200:9200"
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
     volumes:
       - esdata:/usr/share/elasticsearch/data
@@ -43,6 +48,7 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:8.9.0
     container_name: kibana
+    # ADDED: The missing ports and environment sections
     ports:
       - "5601:5601"
     depends_on:
@@ -50,14 +56,8 @@ services:
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
   
-  vector:
-    image: timberio/vector:latest-alpine
-    container_name: vector
-    depends_on:
-      - kafka
-    volumes:
-      - ./vector.toml:/etc/vector/vector.toml:ro
-      - ./test_logs/:/var/log/testdata/
+  # The vector service is only needed on the test device
+  # vector: ...
 
   processor:
     build: .
